@@ -18,6 +18,15 @@ export default function Result() {
   const earnPoints = earnPoints_Number(result, answers, 10)
   const flag = flagResult(totalPoints, earnPoints)
 
+    // Store user result 
+    usePublishResult({
+      result,
+      username : userId,
+      attempts,
+      points: earnPoints,
+      achieved : flag ? "Passed" : "Failed"
+    });
+
   function onRestart() {
     dispatch(resetAllAction())
     dispatch(resetResultAction())

@@ -14,12 +14,13 @@ export const useFetchQuestion = () => {
 
     (async () => {
       try {
-        let questions = await data;
+        let [{ questions, answers }] = await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/questions`);
+
         if(questions.length > 0) {
           setGetData(prev => ({ ...prev, isLoading : false }));
           setGetData(prev => ({ ...prev, apiData : { questions, answers }}));
 
-          // dispatch an action 
+          // dispatch an action
           dispatch(Action.startExamAction({ questions, answers }))
         } else{
             throw new Error("No Question Available");
