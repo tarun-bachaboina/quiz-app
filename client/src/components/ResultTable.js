@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { getServerData } from '../helper/helper'
+import { useDispatch } from 'react-redux';
 
 
 export default function ResultTable() {
 
+  const dispatch = useDispatch();
   const [data, setData] = useState([])  
+
+  useEffect(() => {
+    //Fetch results
+    async function fetchData() {
+      try {
+        let res = await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/result`);
+        setData(res);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchData();
+  }, [dispatch]);
 
   return (
     <div>
