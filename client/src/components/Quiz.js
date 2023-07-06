@@ -9,12 +9,22 @@ import { PushAnswer } from '../hooks/setResult';
 export default function Quiz() {
 
   const [check, setChecked] = useState(undefined)
+  const [counter, setCounter] = useState(9)
   const result = useSelector(state => state.result.result);
   const { queue, trace } = useSelector(state => state.questions);
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+    if(!counter){
+      onNext();
+      setCounter(9);
+    }
+  }, [counter]);
+
   // next button event handler
   function onNext() {
+
     if(trace < queue.length) {
       // increase the trace value by one using MoveNextAction
       dispatch(MoveNextQuestion());
@@ -23,7 +33,7 @@ export default function Quiz() {
       if(result.length <= trace) {
         dispatch(PushAnswer(check))
       }
-    }
+    } 
   
     // reset the value of the checked variable 
     setChecked(undefined)
@@ -49,14 +59,11 @@ export default function Quiz() {
   return (
     <div className='container'>
       <h1 className='title text-light'>Quiz Application</h1>
+      <p className='title text-light'> 00:0{counter} seconds remaining</p>
 
       {/* display questions */}
       <Questions onChecked={onChecked} />
-
-      <div className='grid'>
-        { trace > 0 ? <button className='btn prev' onClick={onPrev}>Prev</button> : <div></div>}
-        <button className='btn next' onClick={onNext}>Next</button>
-      </div>
+      
     </div>
   )
 }

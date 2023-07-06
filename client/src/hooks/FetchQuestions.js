@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import data, { answers } from "../database/data";
 import { useDispatch } from "react-redux";
 import * as Action from '../redux/question_reducer'
 import { getServerData } from "../helper/helper";

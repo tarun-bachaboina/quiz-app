@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ResultTable from './ResultTable';
-import { attempts_Number, earnPoints_Number, flagResult } from '../helper/helper';
+import { deleteServerData, attempts_Number, earnPoints_Number, flagResult } from '../helper/helper';
 import { resetAllAction } from '../redux/question_reducer';
 import { resetResultAction } from '../redux/result_reducer';
 import { usePublishResult } from '../hooks/setResult';
@@ -27,7 +27,8 @@ export default function Result() {
       achieved : flag ? "Passed" : "Failed"
     });
 
-  function onRestart() {
+  async function onRestart() {
+    let res = await deleteServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/result`);
     dispatch(resetAllAction())
     dispatch(resetResultAction())
   }

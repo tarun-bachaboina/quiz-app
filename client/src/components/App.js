@@ -1,6 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React from "react";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import Main from "./Main";
 import Quiz from "./Quiz";
+import Waiting from "./Waiting";
 import Result from "./Result";
 import { CheckUserExist } from "../helper/helper";
 import "../styles/App.css";
@@ -10,6 +12,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+  },
+  {
+    path: "/wait",
+    element: (
+        <Waiting />
+    ),
   },
   {
     path: "/quiz",
@@ -30,6 +38,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+
   return (
     <>
       <RouterProvider router={router} />
