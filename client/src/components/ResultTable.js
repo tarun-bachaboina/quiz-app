@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { getServerData } from '../helper/helper'
-import { useDispatch } from 'react-redux';
+import io from "socket.io-client";
 
+const socket = io.connect("http://localhost:8080");
 
 export default function ResultTable() {
 
-  const dispatch = useDispatch();
   const [data, setData] = useState([])  
 
   useEffect(() => {
-    //Fetch results
+
+    // Socket emit to fetch results
+    socket.on("getResult", fetchData());
+    socket.emit("getResult");
+
+    // Fetch results
     async function fetchData() {
       try {
         let res = await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/result`);
@@ -18,8 +23,11 @@ export default function ResultTable() {
         console.log(error)
       }
     }
-    fetchData();
-  }, [dispatch]);
+
+    return () => {
+      socket.close();
+    };
+  });
 
   return (
     <div>
@@ -27,7 +35,7 @@ export default function ResultTable() {
         <thead className='table-header'>
           <tr className='table-row'>
             <td>Name</td>
-            <td>Attemps</td>
+            <td>Attempts</td>
             <td>Earn Points</td>
             <td>Result</td>
           </tr>

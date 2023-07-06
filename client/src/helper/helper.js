@@ -10,13 +10,13 @@ export function attempts_Number(result) {
 
 //Returns total points earned
 export function earnPoints_Number(result, answers, point) {
-    return result.map((element, i) => answers[i] === element)
-            .filter(i => i).map(i => point).reduce((prev, curr) => prev + curr, 0);
+    return result.map((element, i) => answers[i] === element).filter(i => i)
+                 .map(i => point).reduce((prev, curr) => prev + curr, 0);
 }
 
 //Returns boolean whether Passed or Failed
 export function flagResult(totalPoints, earnPoints) {
-    return (totalPoints * 50 / 100) < earnPoints; // earn 50% marks 
+    return (totalPoints / 2) < earnPoints; // earn 50% marks 
 }
 
 // Check user auth  
@@ -31,6 +31,15 @@ export async function getServerData(url) {
       method: 'GET',
   });
   const data = await response.json();
+  return data;
+}
+
+// Delete server data
+export async function deleteServerData(url) {
+  const response = await fetch(url, {
+      method: 'DELETE',
+  });
+  const data = 'resource deleted...';
   return data;
 }
 
