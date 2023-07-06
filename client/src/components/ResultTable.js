@@ -35,7 +35,7 @@ export default function ResultTable() {
         <thead className='table-header'>
           <tr className='table-row'>
             <td>Name</td>
-            <td>Attemps</td>
+            <td>Attempts</td>
             <td>Earn Points</td>
             <td>Result</td>
           </tr>

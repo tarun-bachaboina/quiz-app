@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ResultTable from './ResultTable';
@@ -47,15 +47,11 @@ export default function Result() {
           <span className='bold'>{totalPoints || 0}</span>
         </div>
         <div className='flex'>
-          <span>Total Questions : </span>
-          <span className='bold'>{ queue.length || 0}</span>
-        </div>
-        <div className='flex'>
           <span>Total Attempts : </span>
           <span className='bold'>{attempts || 0}</span>
         </div>
         <div className='flex'>
-          <span>Total Earn Points : </span>
+          <span>Total Points Earned : </span>
           <span className='bold'>{earnPoints || 0}</span>
         </div>
         <div className='flex'>
