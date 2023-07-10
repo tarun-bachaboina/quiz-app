@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "./Main";
 import Quiz from "./Quiz";
 import Waiting from "./Waiting";
@@ -16,7 +16,9 @@ const router = createBrowserRouter([
   {
     path: "/wait",
     element: (
+      <CheckUserExist>
         <Waiting />
+      </CheckUserExist>
     ),
   },
   {

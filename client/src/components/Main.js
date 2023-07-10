@@ -5,7 +5,7 @@ import { setUserId } from '../redux/result_reducer'
 import io from "socket.io-client";
 import '../styles/Main.css'
 
-const socket = io.connect("http://localhost:8080");
+const socket = io.connect(`${process.env.REACT_APP_SERVER_HOSTNAME}`);
 
 export default function Main() {
 

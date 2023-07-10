@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getServerData } from '../helper/helper'
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:8080");
+const socket = io.connect(`${process.env.REACT_APP_SERVER_HOSTNAME}`);
 
 export default function ResultTable() {
 
